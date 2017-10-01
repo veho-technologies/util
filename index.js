@@ -4,10 +4,11 @@ import { checkNpmVersions } from 'meteor/tmeasday:check-npm-versions';
 
 checkNpmVersions({
     lodash: '^4.17.4',
+    'simpl-schema': '^0.2.3',
 }, 'veho:util');
 
+export * from './lib/idType';
 export * from './lib/validate';
-
 export * from './lib/math';
 
 export function promisify(fn, ...args) {
