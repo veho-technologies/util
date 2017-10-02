@@ -2,6 +2,10 @@ import isArray from 'lodash/isArray';
 import { Meteor } from 'meteor/meteor';
 import { checkNpmVersions } from 'meteor/tmeasday:check-npm-versions';
 
+// lodash doesn't get recognized by check-npm-versions because we never import
+// the whole thing, but only f.e. lodash/isArray. This fixes that.
+import 'lodash/package.json';
+
 checkNpmVersions({
     lodash: '4.17.x',
     'simpl-schema': '0.2.x',
