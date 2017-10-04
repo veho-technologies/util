@@ -8,7 +8,7 @@ import 'lodash/package.json';
 
 checkNpmVersions({
     lodash: '4.17.x',
-    'simpl-schema': '0.2.x',
+    'simpl-schema': '0.x',
 }, 'veho:util');
 
 export * from './lib/idType';
