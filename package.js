@@ -18,6 +18,7 @@ Package.onUse(function (api) {
     api.use([
         'ecmascript',
         'tmeasday:check-npm-versions',
+        'veho:logging',
     ]);
 
     api.mainModule('index.js');

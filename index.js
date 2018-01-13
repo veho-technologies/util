@@ -1,10 +1,10 @@
 import isArray from 'lodash/isArray';
-import { Meteor } from 'meteor/meteor';
-import { checkNpmVersions } from 'meteor/tmeasday:check-npm-versions';
-
 // lodash doesn't get recognized by check-npm-versions because we never import
 // the whole thing, but only f.e. lodash/isArray. This fixes that.
 import 'lodash/package.json';
+import { Meteor } from 'meteor/meteor';
+import { checkNpmVersions } from 'meteor/tmeasday:check-npm-versions';
+import { logger } from 'meteor/veho:logging';
 
 checkNpmVersions({
     lodash: '4.17.x',
@@ -41,4 +41,22 @@ export function delay(ms) {
             resolve();
         }, ms);
     });
+}
+
+export function createIndex(collection, keys, options, rejectOnError = false) {
+    /* eslint-disable consistent-return */
+    return collection.rawCollection()
+        .createIndex(keys, options)
+        .then((idx) => {
+            logger.debug(`successfully created index ${idx} on ${collection._name}`);
+
+            return idx;
+        }, (error) => {
+            logger.error(`error creating index on ${collection._name}`, error);
+
+            if (rejectOnError) {
+                return Promise.reject(error);
+            }
+        });
+    /* eslint-enable consistent-return */
 }
