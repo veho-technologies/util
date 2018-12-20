@@ -8,12 +8,14 @@ import { logger } from 'meteor/veho:logging';
 
 checkNpmVersions({
     lodash: '4.17.x',
-    'simpl-schema': '0.x',
+    'simpl-schema': '1.5.3',
 }, 'veho:util');
 
 export * from './lib/idType';
 export * from './lib/validate';
 export * from './lib/math';
+export * from './lib/slack';
+export * from './lib/googleSheets';
 
 export function promisify(fn, ...args) {
     const [_fn, ctx] = isArray(fn) ? fn : [fn, undefined];
